@@ -103,6 +103,7 @@
             <configuration>
                 <source>9</source>
                 <target>9</target>
+                <parameters>true</parameters>
             </configuration>
         </plugin>
     </plugins>

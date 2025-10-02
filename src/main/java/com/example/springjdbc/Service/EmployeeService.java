@@ -5,6 +5,8 @@ import com.example.springjdbc.Events.EmployeeCreatedEvent;
 import com.example.springjdbc.Exceptions.EmployeeNotFound;
 import com.example.springjdbc.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
@@ -57,7 +59,7 @@ public class EmployeeService {
 
     }
 
-    @Cacheable("employee")
+    @Cacheable(value = "employee",key = "#id")
     public Employee get(Long id) {
         return employeeRepository.findById(id).orElseThrow(() -> new    EmployeeNotFound("Employee not found with id: " + id));
     }
@@ -68,6 +70,7 @@ public class EmployeeService {
         return employeeRepository.findAll(pageable);
     }
 
+    @CachePut(value = "employee",key = "#id")
     public Employee update(Long id, Employee payload) {
         Employee existing = get(id);
         existing.setName(payload.getName());
@@ -111,6 +114,8 @@ public class EmployeeService {
         return employeeRepository.save(existing);
     }
 
+
+    @CacheEvict(value = "employee",key = "#id")
     public void delete(Long id) {
         Employee e = get(id);
         employeeRepository.delete(e);
