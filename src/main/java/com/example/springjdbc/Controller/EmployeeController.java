@@ -1,6 +1,7 @@
 package com.example.springjdbc.Controller;
 
 import com.example.springjdbc.Entity.*;
+import com.example.springjdbc.Service.CacheInspectionService;
 import com.example.springjdbc.Service.EmployeeService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService service;
+
+    @Autowired
+    private CacheInspectionService cacheInspectionService;
 
     @PostMapping
     public ResponseEntity<Employee> create(@RequestBody Employee employee) {
@@ -73,5 +77,10 @@ public class EmployeeController {
     @DeleteMapping("/{id}/projects/{projectId}")
     public ResponseEntity<Employee> unassignProject(@PathVariable("id") Long id, @PathVariable("projectId") Long projectId) {
         return ResponseEntity.ok(service.unassignProject(id, projectId));
+    }
+
+    @GetMapping("/Cache")
+    public void getCacheData(){
+        cacheInspectionService.printCacheContents("employee");
     }
 }

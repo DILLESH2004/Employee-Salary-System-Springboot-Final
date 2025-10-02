@@ -41,4 +41,14 @@ public class Project {
 
     public Set<Employee> getEmployees() { return employees; }
     public void setEmployees(Set<Employee> employees) { this.employees = employees; }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", projectName='" + projectName + '\'' +
+                ", deadline=" + deadline +
+                ", employees=" + employees +
+                '}';
+    }
 }

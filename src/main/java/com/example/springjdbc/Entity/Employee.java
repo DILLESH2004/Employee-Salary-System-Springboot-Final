@@ -111,4 +111,18 @@ public class Employee {
 
     public Set<Project> getProjects() { return projects; }
     public void setProjects(Set<Project> projects) { this.projects = projects; }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", role='" + role + '\'' +
+                ", salary=" + salary +
+                ", hireDate=" + hireDate +
+                ", address=" + address +
+                ", salarySlips=" + salarySlips +
+                ", projects=" + projects +
+                '}';
+    }
 }
