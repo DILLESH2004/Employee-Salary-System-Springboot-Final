@@ -5,6 +5,7 @@ import com.example.springjdbc.Events.EmployeeCreatedEvent;
 import com.example.springjdbc.Exceptions.EmployeeNotFound;
 import com.example.springjdbc.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -56,6 +57,7 @@ public class EmployeeService {
 
     }
 
+    @Cacheable("employee")
     public Employee get(Long id) {
         return employeeRepository.findById(id).orElseThrow(() -> new    EmployeeNotFound("Employee not found with id: " + id));
     }
