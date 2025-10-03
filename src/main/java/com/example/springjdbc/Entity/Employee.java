@@ -7,13 +7,14 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.BatchSize;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.*;
 
 @Entity
 @Table(name = "employees")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-public class Employee {
+public class Employee  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

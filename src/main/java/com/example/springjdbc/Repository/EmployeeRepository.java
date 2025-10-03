@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Long>    {
     List<Employee> findByRoleIgnoreCase(String role);
     @Query("SELECT e FROM Employee e LEFT JOIN FETCH e.address LEFT JOIN FETCH e.salarySlips LEFT JOIN FETCH e.projects")
     Page<Employee> findAll(Pageable pageable);
